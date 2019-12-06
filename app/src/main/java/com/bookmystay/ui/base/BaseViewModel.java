@@ -11,7 +11,7 @@ public abstract class BaseViewModel<N> extends ViewModel {
     private CompositeDisposable mCompositeDisposable;
     private WeakReference<N> mViewer;
 
-    public BaseViewModel() {
+    protected BaseViewModel() {
         this.mCompositeDisposable = new CompositeDisposable();
     }
 

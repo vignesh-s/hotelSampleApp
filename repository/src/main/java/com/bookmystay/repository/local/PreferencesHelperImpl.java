@@ -29,7 +29,11 @@ public class PreferencesHelperImpl implements PreferencesHelper {
 
     @Override
     public Hotel getHotelDetail() {
-        return mGson.fromJson(mPrefs.getString(PREF_KEY_HOTEL_DETAIL, null), Hotel.class);
+        String hotelDetailString = mPrefs.getString(PREF_KEY_HOTEL_DETAIL, null);
+        if (TextUtils.isEmpty(hotelDetailString)) {
+            return null;
+        }
+        return mGson.fromJson(hotelDetailString, Hotel.class);
     }
 
     @Override

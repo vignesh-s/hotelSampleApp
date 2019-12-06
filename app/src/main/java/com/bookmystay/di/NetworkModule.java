@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.bookmystay.data.datasource.HotelRepository;
 import com.bookmystay.repository.NetworkChecker;
-import com.bookmystay.repository.datasource.HotelRepositoryImpl;
+import com.bookmystay.repository.HotelRepositoryImpl;
 import com.bookmystay.repository.local.PreferencesHelperImpl;
 import com.bookmystay.repository.local.PreferencesHelper;
-import com.bookmystay.repository.network.HotelApiEndPoint;
+import com.bookmystay.repository.api.HotelApiEndPoint;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

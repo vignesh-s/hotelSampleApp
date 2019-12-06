@@ -9,10 +9,11 @@ import io.reactivex.Single;
 
 public interface HotelRepository {
 
-    Single saveHotelDetails(Hotel hotel);
+    Single<Hotel> getHotelDetails();
 
-    Single<Hotel> doGetHotelDetails();
+    void saveHotelDetails(Hotel hotel);
 
-    Single<List<Comment>> doGetHotelCommentsApiCall();
+    Single<List<Comment>> getHotelComments();
 
+    void saveComments(List<Comment> hotel);
 }

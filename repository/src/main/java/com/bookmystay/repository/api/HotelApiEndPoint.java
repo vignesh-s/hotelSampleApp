@@ -1,4 +1,4 @@
-package com.bookmystay.repository.network;
+package com.bookmystay.repository.api;
 
 import com.bookmystay.data.model.Comment;
 import com.bookmystay.data.model.Hotel;

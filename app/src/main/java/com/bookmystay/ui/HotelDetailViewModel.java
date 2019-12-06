@@ -15,25 +15,25 @@ public class HotelDetailViewModel extends BaseViewModel<HotelDetailViewer> {
     }
 
     void loadHotelDetails() {
-        getCompositeDisposable().add(mHotelRepository.doGetHotelDetails()
+        getCompositeDisposable().add(mHotelRepository.getHotelDetails()
                 .subscribeOn(Schedulers.io())
+                .doOnSuccess(hotel -> mHotelRepository.saveHotelDetails(hotel))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        hotel -> {
-                            getViewer().onHotelDetailLoaded(hotel);
-                            mHotelRepository.saveHotelDetails(hotel);
-                        },
+                        hotel -> getViewer().onHotelDetailLoaded(hotel),
                         throwable -> getViewer().handleError(throwable)
                 ));
     }
 
     void loadComments() {
-        getCompositeDisposable().add(mHotelRepository.doGetHotelCommentsApiCall()
+        getCompositeDisposable().add(mHotelRepository.getHotelComments()
                 .subscribeOn(Schedulers.io())
+                .doOnSuccess(comments -> mHotelRepository.saveComments(comments))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         comments -> getViewer().onCommentsLoaded(comments),
                         throwable -> getViewer().handleError(throwable)
                 ));
     }
+
 }
