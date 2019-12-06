@@ -1,0 +1,2 @@
+include ':app', ':data', ':repository'
+rootProject.name='Book My Stay'
