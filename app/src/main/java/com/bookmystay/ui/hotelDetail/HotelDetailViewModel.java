@@ -1,4 +1,4 @@
-package com.bookmystay.ui;
+package com.bookmystay.ui.hotelDetail;
 
 import com.bookmystay.data.datasource.HotelRepository;
 import com.bookmystay.ui.base.BaseViewModel;
@@ -31,7 +31,9 @@ public class HotelDetailViewModel extends BaseViewModel<HotelDetailViewer> {
                 .doOnSuccess(comments -> mHotelRepository.saveComments(comments))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        comments -> getViewer().onCommentsLoaded(comments),
+                        comments -> {
+                            getViewer().onCommentsLoaded(comments);
+                        },
                         throwable -> getViewer().handleError(throwable)
                 ));
     }

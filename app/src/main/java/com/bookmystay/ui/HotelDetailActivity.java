@@ -4,29 +4,28 @@ import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bookmystay.BR;
 import com.bookmystay.R;
 import com.bookmystay.ViewModelProviderFactory;
-import com.bookmystay.data.model.Comment;
-import com.bookmystay.data.model.Hotel;
 import com.bookmystay.databinding.ActivityHotelDetailBinding;
 import com.bookmystay.ui.base.BaseActivity;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 public class HotelDetailActivity
-        extends BaseActivity<ActivityHotelDetailBinding, HotelDetailViewModel>
-        implements HotelDetailViewer {
+        extends BaseActivity<ActivityHotelDetailBinding, HomeViewModel>
+        implements HomeViewer {
 
     @Inject
     ViewModelProviderFactory factory;
-    private HotelDetailViewModel mHotelDetailViewModel;
+    private HomeViewModel mHotelDetailViewModel;
     private ActivityHotelDetailBinding mBinding;
+    private HomePagerAdapter mAdapter;
+    public HomeSharedViewModel mSharedViewModel;
 
     @Override
     public int getBindingVariable() {
-        return com.bookmystay.BR.viewModel;
+        return BR.viewModel;
     }
 
     @Override
@@ -35,9 +34,9 @@ public class HotelDetailActivity
     }
 
     @Override
-    public HotelDetailViewModel getViewModel() {
+    public HomeViewModel getViewModel() {
         mHotelDetailViewModel =
-                ViewModelProviders.of(this, factory).get(HotelDetailViewModel.class);
+                ViewModelProviders.of(this, factory).get(HomeViewModel.class);
 
         return mHotelDetailViewModel;
     }
@@ -48,25 +47,13 @@ public class HotelDetailActivity
 
         mBinding = getViewDataBinding();
         mHotelDetailViewModel.setNavigator(this);
+        mSharedViewModel = ViewModelProviders.of(this).get(HomeSharedViewModel.class);
 
-        getViewModel().loadHotelDetails();
-        getViewModel().loadComments();
+        mAdapter = new HomePagerAdapter(getResources(), getSupportFragmentManager(), null);
+        mBinding.viewpager.setAdapter(mAdapter);
+        mBinding.tabLayout.setupWithViewPager(mBinding.viewpager);
     }
 
-    @Override
-    public void onHotelDetailLoaded(Hotel hotel) {
-        mBinding.setHotel(hotel);
-    }
 
-    @Override
-    public void onCommentsLoaded(List<Comment> comments) {
-        CommentsAdapter commentsAdapter = new CommentsAdapter(comments);
-        mBinding.setCommentsAdapter(commentsAdapter);
-    }
-
-    @Override
-    public void handleError(Throwable throwable) {
-        // TODO
-    }
 
 }

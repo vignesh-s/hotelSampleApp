@@ -38,6 +38,14 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
 
             e.printStackTrace();
         }
+        try {
+            return modelClass.newInstance();
+
+        } catch (IllegalAccessException
+                | InstantiationException e) {
+
+            e.printStackTrace();
+        }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

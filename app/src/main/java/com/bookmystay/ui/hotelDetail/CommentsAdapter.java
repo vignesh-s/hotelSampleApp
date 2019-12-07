@@ -1,4 +1,4 @@
-package com.bookmystay.ui;
+package com.bookmystay.ui.hotelDetail;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,5 +58,10 @@ public class CommentsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             binding.setVariable(com.bookmystay.BR.comment, product);
             binding.executePendingBindings();
         }
+    }
+
+    public void setComments(List<Comment> comments) {
+        mComments = comments;
+        notifyDataSetChanged();
     }
 }

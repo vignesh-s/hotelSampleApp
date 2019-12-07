@@ -1,4 +1,4 @@
-package com.bookmystay.ui;
+package com.bookmystay.ui.hotelDetail;
 
 import com.bookmystay.data.model.Comment;
 import com.bookmystay.data.model.Hotel;

@@ -7,6 +7,11 @@ public class Comment {
     private String user;
     private long timestamp;
 
+    public Comment(String comment, String user) {
+        this.comment = comment;
+        this.user = user;
+    }
+
     public String getId() {
         return id;
     }

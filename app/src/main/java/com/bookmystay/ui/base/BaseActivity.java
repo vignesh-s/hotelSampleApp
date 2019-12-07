@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding;
 import dagger.android.AndroidInjection;
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel>
-        extends AppCompatActivity {
+        extends AppCompatActivity implements BaseFragment.Callback {
 
     private T mViewDataBinding;
     private V mViewModel;
@@ -40,6 +40,14 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 //    protected void attachBaseContext(Context newBase) {
 //        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
 //    }
+
+    @Override
+    public void onFragmentAttached() {
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
