@@ -5,9 +5,9 @@ import android.content.Context;
 import com.bookmystay.data.datasource.HotelRepository;
 import com.bookmystay.repository.NetworkChecker;
 import com.bookmystay.repository.HotelRepositoryImpl;
+import com.bookmystay.repository.api.HotelApiService;
 import com.bookmystay.repository.local.PreferencesHelperImpl;
 import com.bookmystay.repository.local.PreferencesHelper;
-import com.bookmystay.repository.api.HotelApiEndPoint;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -81,8 +81,8 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    HotelApiEndPoint provideHotelApiEndPoint(Retrofit retrofit) {
-        return retrofit.create(HotelApiEndPoint.class);
+    HotelApiService provideHotelApiEndPoint(Retrofit retrofit) {
+        return retrofit.create(HotelApiService.class);
     }
 
     @Provides
@@ -93,10 +93,10 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    HotelRepository provideHotelDataSource(HotelApiEndPoint hotelApiEndPoint,
+    HotelRepository provideHotelDataSource(HotelApiService hotelApiService,
                                            PreferencesHelper preferencesHelper,
                                            NetworkChecker networkChecker) {
 
-        return new HotelRepositoryImpl(hotelApiEndPoint, preferencesHelper, networkChecker);
+        return new HotelRepositoryImpl(hotelApiService, preferencesHelper, networkChecker);
     }
 }

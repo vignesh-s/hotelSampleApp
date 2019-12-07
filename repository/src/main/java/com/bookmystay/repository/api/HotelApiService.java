@@ -8,7 +8,7 @@ import java.util.List;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 
-public interface HotelApiEndPoint {
+public interface HotelApiService {
     @GET("api/workshop/hotel/")
     Single<Hotel> doGetHotelDetailsApiCall();
 

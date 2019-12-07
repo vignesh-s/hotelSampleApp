@@ -27,12 +27,15 @@ android {
 dependencies {
     implementation project(":data")
 
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit2Version"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3LoggingInterceptorVersion"
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
