@@ -12,7 +12,6 @@ import com.bookmystay.data.model.Comment;
 import com.bookmystay.data.model.Hotel;
 import com.bookmystay.databinding.FragmentHotelDetailBinding;
 import com.bookmystay.ui.HomeSharedViewModel;
-import com.bookmystay.ui.HotelDetailActivity;
 import com.bookmystay.ui.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -26,9 +25,7 @@ public class HotelDetailFragment
 
     @Inject
     ViewModelProviderFactory factory;
-    private HotelDetailViewModel mHotelDetailViewModel;
     private HomeSharedViewModel mHomeSharedViewModel;
-    private FragmentHotelDetailBinding mBinding;
     private CommentsAdapter mCommentsAdapter;
 
     @Override
@@ -43,10 +40,10 @@ public class HotelDetailFragment
 
     @Override
     public HotelDetailViewModel getViewModel() {
-        mHotelDetailViewModel =
+        mViewModel =
                 ViewModelProviders.of(this, factory).get(HotelDetailViewModel.class);
 
-        return mHotelDetailViewModel;
+        return mViewModel;
     }
 
     @Override
@@ -56,7 +53,8 @@ public class HotelDetailFragment
         if (getActivity() == null) {
             return;
         }
-        mHomeSharedViewModel = ((HotelDetailActivity) getActivity()).mSharedViewModel;
+        mViewModel.setNavigator(this);
+        mHomeSharedViewModel = ViewModelProviders.of(getActivity(), factory).get(HomeSharedViewModel.class);
         mHomeSharedViewModel.mComments.observe(this, this::updateCommentsList);
         getViewModel().loadHotelDetails();
         getViewModel().loadComments();

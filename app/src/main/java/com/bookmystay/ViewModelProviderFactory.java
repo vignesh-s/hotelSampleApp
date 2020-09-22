@@ -8,7 +8,9 @@ import com.bookmystay.data.datasource.HotelRepository;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,10 +29,19 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
     @Override
     public <T extends ViewModel> T create(@NotNull Class<T> modelClass) {
         try {
-            return modelClass
-                .getConstructor(HotelRepository.class)
-                .newInstance(mDataSource);
-
+            boolean isDataSourceNeeded = false;
+            try {
+                modelClass.getConstructor(HotelRepository.class);
+                isDataSourceNeeded = true;
+            } catch (NoSuchMethodException ignored) {
+            }
+            if (isDataSourceNeeded) {
+                return modelClass
+                        .getConstructor(HotelRepository.class)
+                        .newInstance(mDataSource);
+            } else {
+                return modelClass.newInstance();
+            }
         } catch (IllegalAccessException
             | InstantiationException
             | InvocationTargetException

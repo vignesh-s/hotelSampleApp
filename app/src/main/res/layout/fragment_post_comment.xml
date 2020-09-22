@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.bookmystay.ui.postComment.PostCommentViewModel" />
+            type="com.bookmystay.ui.HomeSharedViewModel" />
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etName"
@@ -30,6 +30,7 @@
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="submit"
             />
     </LinearLayout>
 

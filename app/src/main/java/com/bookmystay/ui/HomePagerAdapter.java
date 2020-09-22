@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.bookmystay.R;
 import com.bookmystay.ui.hotelDetail.HotelDetailFragment;
+import com.bookmystay.ui.postComment.PostCommentFragment;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
     private final Resources resources;

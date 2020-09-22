@@ -54,6 +54,4 @@ public class HotelDetailActivity
         mBinding.tabLayout.setupWithViewPager(mBinding.viewpager);
     }
 
-
-
 }

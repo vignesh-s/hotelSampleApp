@@ -15,20 +15,18 @@ import com.bookmystay.databinding.FragmentPostCommentBinding;
 import com.bookmystay.ui.HomeSharedViewModel;
 import com.bookmystay.ui.HotelDetailActivity;
 import com.bookmystay.ui.base.BaseFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 public class PostCommentFragment
-        extends BaseFragment<FragmentPostCommentBinding, PostCommentViewModel>
+        extends BaseFragment<FragmentPostCommentBinding, HomeSharedViewModel>
         implements PostCommentViewer {
 
     @Inject
     ViewModelProviderFactory factory;
-    private PostCommentViewModel mPostCommentViewModel;
-    private HomeSharedViewModel mHomeSharedViewModel;
-    private FragmentPostCommentBinding mBinding;
 
     @Override
     public int getBindingVariable() {
@@ -41,11 +39,11 @@ public class PostCommentFragment
     }
 
     @Override
-    public PostCommentViewModel getViewModel() {
-        mPostCommentViewModel =
-                ViewModelProviders.of(this, factory).get(PostCommentViewModel.class);
+    public HomeSharedViewModel getViewModel() {
+        mViewModel =
+                ViewModelProviders.of(getActivity(), factory).get(HomeSharedViewModel.class);
 
-        return mPostCommentViewModel;
+        return mViewModel;
     }
 
     @Override
@@ -54,7 +52,6 @@ public class PostCommentFragment
         if (getActivity() == null) {
             return;
         }
-        mHomeSharedViewModel = ((HotelDetailActivity) getActivity()).mSharedViewModel;
         mBinding.submitButton.setOnClickListener(v -> submitComment());
     }
 
@@ -65,12 +62,14 @@ public class PostCommentFragment
     }
 
     private void addComment(Comment comment) {
-        ArrayList<Comment> comments = mHomeSharedViewModel.mComments.getValue();
+        ArrayList<Comment> comments = mViewModel.mComments.getValue();
         if (comments == null) {
+            Snackbar.make(mRootView, "comments == null", Snackbar.LENGTH_SHORT).show();
             return;
         }
         comments.add(comment);
-        mHomeSharedViewModel.mComments.postValue(comments);
+        mViewModel.mComments.postValue(comments);
+        Snackbar.make(mRootView, "posted", Snackbar.LENGTH_SHORT).show();
     }
 
     private String getStringFromEditText(AppCompatEditText appCompatEditText) {

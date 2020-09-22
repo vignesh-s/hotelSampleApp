@@ -21,9 +21,9 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         extends Fragment {
 
     private BaseActivity mActivity;
-    private View mRootView;
-    private T mViewDataBinding;
-    private V mViewModel;
+    protected View mRootView;
+    protected V mViewModel;
+    protected T mBinding;
 
     /**
      * Override for set binding variable
@@ -67,8 +67,8 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        mRootView = mViewDataBinding.getRoot();
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        mRootView = mBinding.getRoot();
         return mRootView;
     }
 
@@ -81,9 +81,9 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
-        mViewDataBinding.setLifecycleOwner(this);
-        mViewDataBinding.executePendingBindings();
+        mBinding.setVariable(getBindingVariable(), mViewModel);
+        mBinding.setLifecycleOwner(this);
+        mBinding.executePendingBindings();
     }
 
     public BaseActivity getBaseActivity() {
@@ -91,7 +91,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     }
 
     public T getViewDataBinding() {
-        return mViewDataBinding;
+        return mBinding;
     }
 
     public View getRootView() {

@@ -11,6 +11,6 @@ import java.util.ArrayList;
 
 public class HomeSharedViewModel extends BaseViewModel<HotelDetailViewer> {
 
-    public MutableLiveData<ArrayList<Comment>> mComments;
+    public MutableLiveData<ArrayList<Comment>> mComments = new MutableLiveData<>();
 
 }

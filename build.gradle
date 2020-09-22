@@ -37,7 +37,7 @@ ext {
     lifecycleVersion = '2.1.0'
     recyclerViewVersion = '1.1.0'
     cardViewVersion = '1.0.0'
-    materialVersion = '1.0.0'
+    materialVersion = '1.1.0'
 
     dagger2Version = '2.16'
 

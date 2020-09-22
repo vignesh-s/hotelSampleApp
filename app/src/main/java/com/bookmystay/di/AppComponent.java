@@ -13,6 +13,7 @@ import dagger.android.AndroidInjectionModule;
 @Singleton
 @Component(modules = {
         ActivityBuilder.class,
+        FragmentBuilder.class,
         AndroidInjectionModule.class,
         AppModule.class,
         NetworkModule.class
